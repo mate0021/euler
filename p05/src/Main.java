@@ -5,10 +5,6 @@ import java.util.stream.Stream;
 
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
-abcdef
-a = f
-b = e
-c = d
 
           6 7 8 9 10
  */
