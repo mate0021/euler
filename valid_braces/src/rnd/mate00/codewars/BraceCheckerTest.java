@@ -40,5 +40,17 @@ public class BraceCheckerTest {
         assertFalse(checker.isValid("[][{()]"));
         assertFalse(checker.isValid("[{(})]"));
         assertFalse(checker.isValid("()()["));
+        assertFalse(checker.isValid("(({{[[]]}})"));
+    }
+
+    @Test
+    public void invalidSingles() {
+        assertFalse(checker.isValid("("));
+        assertFalse(checker.isValid(")"));
+    }
+
+    @Test
+    public void invalidFromAttempt() {
+        assertFalse(checker.isValid("())({}}{()][]["));
     }
 }

@@ -17,7 +17,7 @@ public class BraceChecker {
             for (int x = 1; x < chars.length; x++) {
                 if (isOpeningBracket(chars[x])) {
                     stack.push(chars[x]);
-                } else if (isClosingBracket(chars[x]) && !isMatching(stack.pop(), chars[x])) {
+                } else if (isClosingBracket(chars[x]) && !stack.isEmpty() && !isMatching(stack.pop(), chars[x])) {
                     return false;
                 }
             }
