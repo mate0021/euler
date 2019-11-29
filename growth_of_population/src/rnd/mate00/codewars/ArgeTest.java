@@ -1,5 +1,7 @@
 package rnd.mate00.codewars;
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ArgeTest {
@@ -8,7 +10,7 @@ public class ArgeTest {
         assertEquals(expected, actual);
     }
 
-    @org.junit.Test
+    @Test
     public void test1() {
         System.out.println("Fixed Tests: nbYear");
         testing(Arge.nbYear(1500, 5, 100, 5000),15);
