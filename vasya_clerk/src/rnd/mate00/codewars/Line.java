@@ -9,8 +9,6 @@ import java.util.Queue;
  */
 public class Line {
 
-    private static final int TICKET_PRICE = 25;
-
     public static String Tickets(int[] q) {
         Queue<Integer> queue = new ArrayDeque<>();
         for (int cash : q) {
@@ -19,24 +17,29 @@ public class Line {
 
         System.out.println(queue);
 
-        int myCash = 0;
-        boolean can = true;
-        for (int i = 0; i < q.length; i++) {
-            if (q[i] == TICKET_PRICE) {
-                myCash += q[i];
-            } else if (q[i] > TICKET_PRICE && canChange(myCash, q[i])) {
-                myCash -= (q[i] - TICKET_PRICE);
-            } else {
-                can = false;
-                break;
+        int b25 = 0;
+        int b50 = 0;
+        for (int pay : q) {
+            if (pay == 25) {
+                b25++;
+            } else if (pay == 50) {
+                b25--;
+                b50++;
+            } else if (pay == 100) {
+                if (b50 > 0 && b25 > 0) {
+                    b50--;
+                    b25--;
+                } else {
+                    b25 -= 3;
+                }
+            }
+
+            if (b25 < 0 || b50 < 0) {
+                return "NO";
             }
         }
 
-        return can ? "YES" : "NO";
-    }
-
-    private static boolean canChange(int myCash, int nextClient) {
-        return myCash >= nextClient - TICKET_PRICE;
+        return "YES";
     }
 
     private static boolean handleCustomer(int myCash, Queue<Integer> remaining) {

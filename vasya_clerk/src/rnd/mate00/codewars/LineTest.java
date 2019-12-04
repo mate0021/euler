@@ -53,7 +53,7 @@ public class LineTest {
 
     @Test
     public void notPossibleToHandleAllQueue8() {
-        assertEquals("NO", Line.Tickets(new int[] {25, 25, 25, 25, 50, 100, 50}));
+        assertEquals("YES", Line.Tickets(new int[] {25, 25, 25, 25, 50, 100, 50}));
     }
 
     @Test
