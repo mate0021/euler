@@ -9,15 +9,34 @@ import java.util.Queue;
  */
 public class Line {
 
-    public static String Tickets(int[] peopleInLine) {
+    private static final int TICKET_PRICE = 25;
+
+    public static String Tickets(int[] q) {
         Queue<Integer> queue = new ArrayDeque<>();
-        for (int cash : peopleInLine) {
+        for (int cash : q) {
             queue.add(cash);
         }
 
         System.out.println(queue);
 
-        return handleCustomer(queue.poll(), queue) ? "YES" : "NO";
+        int myCash = 0;
+        boolean can = true;
+        for (int i = 0; i < q.length; i++) {
+            if (q[i] == TICKET_PRICE) {
+                myCash += q[i];
+            } else if (q[i] > TICKET_PRICE && canChange(myCash, q[i])) {
+                myCash -= (q[i] - TICKET_PRICE);
+            } else {
+                can = false;
+                break;
+            }
+        }
+
+        return can ? "YES" : "NO";
+    }
+
+    private static boolean canChange(int myCash, int nextClient) {
+        return myCash >= nextClient - TICKET_PRICE;
     }
 
     private static boolean handleCustomer(int myCash, Queue<Integer> remaining) {
