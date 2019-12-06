@@ -1,7 +1,6 @@
 package rnd.mate00.codewars;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -15,32 +14,44 @@ public class PigLatin {
         System.out.println(str);
 
         String[] words = str.split(" ");
+        StringBuilder sb = new StringBuilder();
         int i = 0;
         for (String w : words) {
-            words[i++] = swapLetter(w);
+            String swapped = swapLetter(w);
+//            words[i++] = swapped;
+            System.out.println(swapped);
+            sb.append(swapped);
+            sb.append(" ");
         }
 
-        return str;
+        return sb.toString().trim();
     }
 
     private static String swapLetter(String word) {
-        List<Character> chars = new ArrayList<>();
-        for (char c : word.toCharArray()) {
-            chars.add(c);
-        }
-        String newSuffix = chars.get(0) + "ay";
+        System.out.println(word);
+        List<Character> newWord = new ArrayList<>();
 
-        for (int i = 1; i < word.length(); i++) {
-            chars.add(i - 1, word.charAt(i));
+        int x = 0;
+        while (!isCharacter(word.charAt(x))) {
+            newWord.add(word.charAt(x++));
         }
-
-        char swap;
-        for (int i = 0; i < word.length(); i++) {
+        char firstChar = word.charAt(x);
+//        System.out.println(String.format("Stopped at %d char %s", x, word.charAt(x)));
+//        System.out.println(newWord);
+        for (int i = x + 1; i < word.length(); i++) {
             if (isCharacter(word.charAt(i))) {
-
+                newWord.add(word.charAt(i));
+            } else {
+                newWord.add(firstChar);
+                newWord.add('a');
+                newWord.add('y');
+                newWord.add(word.charAt(i));
             }
         }
-        return word;
+        StringBuilder sb = new StringBuilder();
+        newWord.stream().forEach(l -> sb.append(l));
+
+        return sb.toString();
     }
 
     private static boolean isCharacter(Character c) {

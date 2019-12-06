@@ -2,7 +2,7 @@ package rnd.mate00.codewars;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PigLatinTest {
 
