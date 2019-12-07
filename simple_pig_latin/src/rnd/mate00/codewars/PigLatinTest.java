@@ -17,9 +17,14 @@ public class PigLatinTest {
         assertEquals("illWay odecay, orfay oodfay!", PigLatin.pigIt("Will code, for food!"));
     }
 
-    @Test
+//    @Test
     public void spanishExclamationUntouched() {
         assertEquals("!olaHay, enioressay!", PigLatin.pigIt("!Hola, seniores!"));
+    }
+
+    @Test
+    public void exclamationAtTheEnd() {
+        assertEquals("oratay oay oresmay !", PigLatin.pigIt("O tempora o mores !"));
     }
 
 }

@@ -1,7 +1,5 @@
 package rnd.mate00.codewars;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -17,8 +15,8 @@ public class PigLatin {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         for (String w : words) {
-            String swapped = swapLetter(w);
-//            words[i++] = swapped;
+            System.out.println(w);
+            String swapped = swapFirstLetter(w);
             System.out.println(swapped);
             sb.append(swapped);
             sb.append(" ");
@@ -27,34 +25,29 @@ public class PigLatin {
         return sb.toString().trim();
     }
 
-    private static String swapLetter(String word) {
-        System.out.println(word);
-        List<Character> newWord = new ArrayList<>();
-
-        int x = 0;
-        while (!isCharacter(word.charAt(x))) {
-            newWord.add(word.charAt(x++));
-        }
-        char firstChar = word.charAt(x);
-//        System.out.println(String.format("Stopped at %d char %s", x, word.charAt(x)));
-//        System.out.println(newWord);
-        for (int i = x + 1; i < word.length(); i++) {
-            if (isCharacter(word.charAt(i))) {
-                newWord.add(word.charAt(i));
-            } else {
-                newWord.add(firstChar);
-                newWord.add('a');
-                newWord.add('y');
-                newWord.add(word.charAt(i));
+    private static String swapFirstLetter(String word) {
+        StringBuilder sb = new StringBuilder();
+        char firstChar = word.charAt(0);
+        for (int i = 1; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if (isCharacter(c)) {
+                sb.append(c);
             }
         }
-        StringBuilder sb = new StringBuilder();
-        newWord.stream().forEach(l -> sb.append(l));
+        sb.append(firstChar + "ay");
+        if (!isCharacter(word.charAt(word.length() - 1))) {
+            sb.append(word.charAt(word.length() - 1));
+        }
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     private static boolean isCharacter(Character c) {
-        return Pattern.matches("\\w", String.valueOf(c));
+        return isCharacter(String.valueOf(c));
+//        return Pattern.matches("\\w", String.valueOf(c));
+    }
+
+    private static boolean isCharacter(String s) {
+        return Pattern.matches("\\w", s);
     }
 }
