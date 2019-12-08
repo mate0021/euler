@@ -50,4 +50,11 @@ public class PigLatin {
     private static boolean isCharacter(String s) {
         return Pattern.matches("\\w", s);
     }
+
+    /**
+     * Killer
+     */
+//    public static String pigIt(String str) {
+//        return str.replaceAll("(\\w)(\\w*)", "$2$1ay");
+//    }
 }
