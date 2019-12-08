@@ -24,7 +24,7 @@ public class PigLatinTest {
 
     @Test
     public void exclamationAtTheEnd() {
-        assertEquals("oratay oay oresmay !", PigLatin.pigIt("O tempora o mores !"));
+        assertEquals("Oay emporatay oay oresmay !", PigLatin.pigIt("O tempora o mores !"));
     }
 
 }

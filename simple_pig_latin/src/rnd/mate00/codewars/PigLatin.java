@@ -15,9 +15,7 @@ public class PigLatin {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         for (String w : words) {
-            System.out.println(w);
             String swapped = swapFirstLetter(w);
-            System.out.println(swapped);
             sb.append(swapped);
             sb.append(" ");
         }
@@ -26,6 +24,9 @@ public class PigLatin {
     }
 
     private static String swapFirstLetter(String word) {
+        if (word.length() == 1 && !isCharacter(word)) {
+            return word;
+        }
         StringBuilder sb = new StringBuilder();
         char firstChar = word.charAt(0);
         for (int i = 1; i < word.length(); i++) {
@@ -44,7 +45,6 @@ public class PigLatin {
 
     private static boolean isCharacter(Character c) {
         return isCharacter(String.valueOf(c));
-//        return Pattern.matches("\\w", String.valueOf(c));
     }
 
     private static boolean isCharacter(String s) {
