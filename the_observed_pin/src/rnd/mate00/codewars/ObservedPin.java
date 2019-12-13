@@ -7,13 +7,15 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 
+/**
+ * https://www.codewars.com/kata/the-observed-pin/train/java
+ * 
+ */
 public class ObservedPin {
 
     private static final Map<Character, List<String>> neighbours = new HashMap<>() {{
         put('1', asList("1", "2", "4"));
         put('3', asList("3", "2", "6"));
-
-
 
 
         put('2', asList("2", "1", "3", "5"));
