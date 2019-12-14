@@ -39,7 +39,19 @@ public class ObservedPin {
         return result;
     }
 
+    private List<String> mergeLists(List<String>... lists) {
+        List<String> result = new ArrayList<>();
+        for (int lNo = 0; lNo < lists.length; lNo++) {
+            lists[lNo].get(0) + lists[lNo+1].get(0) + ... + lists[lNo]
+        }
+        return result;
+    }
+
     /*
     13 -> 13, 12, 16, 23, 22, 26, 43, 42, 46
+
+    341 -> (3,2,6), (4,1,5,7), (1,2,4)
+    301 -> (3,2,6), (0,8), (1,2,4)
+
      */
 }
