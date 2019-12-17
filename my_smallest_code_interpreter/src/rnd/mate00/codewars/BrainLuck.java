@@ -6,12 +6,12 @@ package rnd.mate00.codewars;
  */
 public class BrainLuck {
 
-    private byte[] mem;
+    private char[] mem;
 
     private char[] code;
 
     public BrainLuck(String code) {
-        mem = new byte[1024];
+        mem = new char[1024];
         initMemoryBlock();
         this.code = code.toCharArray();
         System.out.println("Loaded code: " + code);
@@ -19,9 +19,11 @@ public class BrainLuck {
 
     public String process(String input) {
         System.out.println("Processing input " + input);
+        char[] inputs = input.toCharArray();
         StringBuilder console = new StringBuilder();
 
         int ptr = 0;
+        int inNo = 0;
         for (int c = 0; c < code.length; c++) {
             char instruction = code[c];
             switch (instruction) {
@@ -32,7 +34,7 @@ public class BrainLuck {
                     --ptr;
                     break;
                 case '+':
-                    if (mem[ptr] == 255) {
+                    if (mem[ptr] == (char) 255) {
                         mem[ptr] = 0;
                     } else {
                         mem[ptr]++;
@@ -40,7 +42,7 @@ public class BrainLuck {
                     break;
                 case '-':
                     if (mem[ptr] == 0) {
-                        mem[ptr] = (byte) 255;
+                        mem[ptr] = (char) 255;
                     } else {
                         mem[ptr]--;
                     }
@@ -49,6 +51,9 @@ public class BrainLuck {
                     console.append(mem[ptr]);
                     break;
                 case ',':
+                    if (inNo < inputs.length) {
+                        mem[ptr] = inputs[inNo++];
+                    }
                     break;
                 case '[':
                     break;
