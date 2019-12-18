@@ -1,5 +1,7 @@
 package rnd.mate00.codewars;
 
+import java.util.Stack;
+
 /**
  * https://www.codewars.com/kata/my-smallest-code-interpreter-aka-brainf-star-star-k/train/java
  *
@@ -24,14 +26,16 @@ public class BrainLuck {
 
         int ptr = 0;
         int inNo = 0;
+        Stack<Integer> currentLoopIndex = new Stack<>();
         for (int c = 0; c < code.length; c++) {
             char instruction = code[c];
+            System.out.println(String.format("code[%d] - %s, mem - %s (%d)", c, instruction, mem[0], (int) mem[0]));
             switch (instruction) {
                 case '>':
-                    ++ptr;
+                    ptr++;
                     break;
                 case '<':
-                    --ptr;
+                    ptr--;
                     break;
                 case '+':
                     if (mem[ptr] == (char) 255) {
@@ -56,8 +60,17 @@ public class BrainLuck {
                     }
                     break;
                 case '[':
+                    currentLoopIndex.push(c);
+//                    if (mem[ptr] != 0) {
+//                        continue;
+//                    }
                     break;
                 case ']':
+                    if (mem[ptr] != 0) {
+                        c = currentLoopIndex.peek();
+                    } else {
+                        currentLoopIndex.pop();
+                    }
                     break;
             }
         }
@@ -69,5 +82,13 @@ public class BrainLuck {
         for (int i = 0; i < mem.length; i++) {
             mem[i] = 0;
         }
+    }
+
+    public char[] getMem() {
+        return mem;
+    }
+
+    public void setMem(char[] mem) {
+        this.mem = mem;
     }
 }
