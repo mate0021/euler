@@ -13,7 +13,7 @@ public class BrainLuck {
     private char[] code;
 
     public BrainLuck(String code) {
-        mem = new char[1024];
+        mem = new char[512];
         initMemoryBlock();
         this.code = code.toCharArray();
         System.out.println("Loaded code: " + code);
@@ -30,6 +30,10 @@ public class BrainLuck {
         for (int c = 0; c < code.length; c++) {
             char instruction = code[c];
             System.out.println(String.format("code[%d] - %s, mem - %s (%d)", c, instruction, mem[0], (int) mem[0]));
+            for (char z : mem) {
+                System.out.print((int)z + "|");
+            }
+            System.out.println();
             switch (instruction) {
                 case '>':
                     ptr++;
