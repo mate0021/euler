@@ -13,7 +13,7 @@ public class BrainLuck {
     private char[] code;
 
     public BrainLuck(String code) {
-        mem = new char[512];
+        mem = new char[1024];
         initMemoryBlock();
         this.code = code.toCharArray();
         System.out.println("Loaded code: " + code);
@@ -29,11 +29,7 @@ public class BrainLuck {
         Stack<Integer> currentLoopIndex = new Stack<>();
         for (int c = 0; c < code.length; c++) {
             char instruction = code[c];
-            System.out.println(String.format("code[%d] - %s, mem - %s (%d)", c, instruction, mem[0], (int) mem[0]));
-            for (char z : mem) {
-                System.out.print((int)z + "|");
-            }
-            System.out.println();
+
             switch (instruction) {
                 case '>':
                     ptr++;
@@ -64,14 +60,26 @@ public class BrainLuck {
                     }
                     break;
                 case '[':
+                    System.out.println("new [, pushing on " + c);
                     currentLoopIndex.push(c);
-//                    if (mem[ptr] != 0) {
-//                        continue;
-//                    }
+                    if (mem[ptr] == 0) {
+                        int nonMatching = 0;
+                        for (int i = c; i < code.length; i++) {
+                            if (code[i] == '[') {
+                                nonMatching++;
+                            }
+                            if (code[i] == ']') {
+                                if (--nonMatching == 0) {
+                                    c = i + 1;
+                                }
+                            }
+                        }
+                    }
                     break;
                 case ']':
                     if (mem[ptr] != 0) {
-                        c = currentLoopIndex.peek();
+                        c = currentLoopIndex.pop();
+                        System.out.println("jump back to " + c);
                     } else {
                         currentLoopIndex.pop();
                     }
