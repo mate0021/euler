@@ -1,5 +1,6 @@
 package rnd.mate00.codewars;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -35,7 +36,9 @@ public class BrainLuck {
                     ptr++;
                     break;
                 case '<':
-                    ptr--;
+                    if (ptr >= 1) {
+                        ptr--;
+                    }
                     break;
                 case '+':
                     if (mem[ptr] == (char) 255) {
@@ -60,7 +63,6 @@ public class BrainLuck {
                     }
                     break;
                 case '[':
-                    System.out.println("new [, pushing on " + c);
                     currentLoopIndex.push(c);
                     if (mem[ptr] == 0) {
                         int nonMatching = 0;
@@ -68,18 +70,15 @@ public class BrainLuck {
                             if (code[i] == '[') {
                                 nonMatching++;
                             }
-                            if (code[i] == ']') {
-                                if (--nonMatching == 0) {
-                                    c = i + 1;
-                                }
+                            if (code[i] == ']' && --nonMatching == 0) {
+                                c = i + 1;
                             }
                         }
                     }
                     break;
                 case ']':
                     if (mem[ptr] != 0) {
-                        c = currentLoopIndex.pop();
-                        System.out.println("jump back to " + c);
+                        c = currentLoopIndex.peek();
                     } else {
                         currentLoopIndex.pop();
                     }
@@ -91,9 +90,7 @@ public class BrainLuck {
     }
 
     private void initMemoryBlock() {
-        for (int i = 0; i < mem.length; i++) {
-            mem[i] = 0;
-        }
+        Arrays.fill(mem, (char) 0);
     }
 
     public char[] getMem() {
