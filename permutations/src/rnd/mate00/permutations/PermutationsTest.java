@@ -15,19 +15,19 @@ public class PermutationsTest {
     public void testSingle() {
         List<String> result = Permutations.singlePermutations("a");
         assertTrue(result.size() == 1);
-        assertEquals(result, Arrays.asList("a"));
+        assertEquals(Arrays.asList("a"), result);
     }
 
     @Test
     public void testDouble() {
         List<String> result = Permutations.singlePermutations("ab");
         assertEquals(2, result.size());
-        assertEquals(result, Arrays.asList("ab", "ba"));
+        assertEquals(Arrays.asList("ab", "ba"), result);
     }
 
     @Test
     public void testQuadruple() {
         List<String> result = Permutations.singlePermutations("aabb");
-        assertEquals(result, Arrays.asList("aabb","abab","abba","baab","baba","bbaa"));
+        assertEquals(Arrays.asList("aabb","abab","abba","baab","baba","bbaa"), result);
     }
 }
