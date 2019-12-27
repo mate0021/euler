@@ -1,8 +1,6 @@
 package rnd.mate00.codewars.mostfreqwords;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -17,13 +15,8 @@ public class TopWords {
             return Collections.emptyList();
         }
         List<String> strings = Arrays.asList(s.split(" "));
-
-        System.out.println(strings.size());
-        System.out.println(strings);
-
         List<String> frequencyMap = strings.stream()
-                .filter(e -> !e.isEmpty() && !e.isBlank())
-                .filter(e -> !e.matches("[.,]+"))
+                .filter(e -> !e.isEmpty() && !e.isBlank() && !e.matches("[.,]+"))
                 .peek(s12 -> System.out.println(">>" + s12 + "<<"))
                 .map(s1 -> {
                     return s1.replaceAll("[.:,/ ]", "").trim();
