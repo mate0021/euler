@@ -2,6 +2,7 @@ package rnd.mate00.codewars.mostfreqwords;
 
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.stream.*;
 import java.util.Arrays;
 
@@ -45,8 +46,16 @@ public class TopWordsTest {
 
     @Test
     public void t5() {
-        assertEquals(Arrays.asList(), TopWords.top3("  ...  "));
-        assertEquals(Arrays.asList(), TopWords.top3("  '  "));
-        assertEquals(Arrays.asList(), TopWords.top3("  '''  "));
+        assertEquals(Collections.emptyList(), TopWords.top3("  ...  "));
+    }
+
+    @Test
+    public void t6() {
+        assertEquals(Collections.emptyList(), TopWords.top3("  '''  "));
+    }
+
+    @Test
+    public void t7() {
+        assertEquals(Collections.emptyList(), TopWords.top3("  '  "));
     }
 }
