@@ -1,7 +1,12 @@
 package rnd.mate00.codewars.mostfreqwords;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Comparator.reverseOrder;
+import static java.util.stream.Collectors.*;
 
 /**
  * https://www.codewars.com/kata/most-frequently-used-words-in-a-text/train/java
@@ -14,22 +19,18 @@ public class TopWords {
         if (s.matches("\\W+")) {
             return Collections.emptyList();
         }
-        List<String> strings = Arrays.asList(s.split(" "));
-        List<String> frequencyMap = strings.stream()
+        List<String> strings = Arrays.asList(s.split("[^a-zA-Z0-9']+"));
+
+        List<String> mostFrequent = strings.stream()
                 .filter(e -> !e.isEmpty() && !e.isBlank() && !e.matches("[.,]+"))
-                .peek(s12 -> System.out.println(">>" + s12 + "<<"))
-                .map(s1 -> {
-                    return s1.replaceAll("[.:,/ ]", "").trim();
-                })
-                .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()))
+                .collect(groupingBy(String::toLowerCase, counting()))
                 .entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .sorted(Map.Entry.comparingByValue(reverseOrder()))
                 .limit(3)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .collect(toList());
 
-        System.out.println(" < " + frequencyMap);
-        return frequencyMap;
+        return mostFrequent;
     }
 }
