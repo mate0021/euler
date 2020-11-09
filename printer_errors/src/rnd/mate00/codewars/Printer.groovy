@@ -1,5 +1,8 @@
 package rnd.mate00.codewars
 
+/**
+ * https://www.codewars.com/kata/56541980fa08ab47a0000040
+ */
 class Printer {
 
     static String printerError(s) {
