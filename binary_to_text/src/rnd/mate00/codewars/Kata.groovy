@@ -5,7 +5,7 @@ package rnd.mate00.codewars
  */
 class Kata {
 
-    static def binaryToString(String input) {
+    static def binaryToStringMy(String input) {
         List<String> bytes = new ArrayList<>();
         def aByte = ''
         def counter = 0
@@ -32,4 +32,13 @@ class Kata {
         result
     }
 
+    static def binaryToString(String input) {
+        input.toList()
+            .collate(8)
+            .stream()
+            .map { it.join("") }                        // <- instead of this
+            .map { ((char) Integer.parseInt(it, 2)) } // Integer.parseInt(it.join(""), 2)
+            .collect()
+            .join()
+    }
 }
