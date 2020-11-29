@@ -12,10 +12,17 @@ class Meeting {
             def split = it.split(':')*.toUpperCase()
             new Tuple(split[1], split[0])
         }
-        .sort {it.get(0) }
+//        .sort { it.get(0) }
+        .toSorted {a, b ->
+            if (a.get(0) == b.get(0)) {
+                a.get(1) <=> b.get(1)
+            } else {
+                a.get(0) <=> b.get(0)
+            }
+        }
         .collect {
             "(${it[0]}, ${it[1]})"
         }
-        .join('')
+        .join ''
     }
 }

@@ -22,6 +22,6 @@ class MeetingTest {
 
     @Test
     void "When last names are the same, sort by first" () {
-        testing("", "")
+        testing("Alexis:Wahl;John:Bell;Chris:Bell", "(BELL, CHRIS)(BELL, JOHN)(WAHL, ALEXIS)")
     }
 }
